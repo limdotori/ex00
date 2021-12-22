@@ -20,7 +20,7 @@
 		<level value="info" />
 	</logger>z
 	<logger name="org.springframework.web">
-		<level value="info" />
+		<level value="warn" />
 	</logger>
 
 	<!-- Root Logger -->

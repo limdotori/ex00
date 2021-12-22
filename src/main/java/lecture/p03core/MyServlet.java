@@ -1,5 +1,8 @@
 package lecture.p03core;
 
+import lombok.Setter;
+
+@Setter
 public class MyServlet {
 	MyDao dao = new MyDao();
 
