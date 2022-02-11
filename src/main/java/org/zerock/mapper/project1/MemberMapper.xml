@@ -5,45 +5,46 @@
 
 <mapper namespace="org.zerock.mapper.project1.MemberMapper">
 
-<insert id="insert" >
-INSERT INTO
-	Member (id, password, email, address)
-VALUES
-	(#{id}, #{password}, #{email}, #{address} )
-</insert>
+	<insert id="insert">
+		INSERT INTO
+		Member (id, password, email, address, nickName)
+		VALUES
+		(#{id}, #{password}, #{email}, #{address} , #{nickName})
+	</insert>
 
-<select id="select" resultType="org.zerock.domain.project1.MemberVO">
-	SELECT
-		id,
-		password,
-		email,
-		address,
-		inserted 
-	FROM
-		Member
-	WHERE
+	<select id="select"
+		resultType="org.zerock.domain.project1.MemberVO">
+		SELECT
+		id, password, email, address, inserted, nickName
+		FROM Member
+		WHERE
 		id=#{id}
 
-</select>
+	</select>
 
-<update id="update">
-	UPDATE
+	<update id="update">
+		UPDATE
 		Member
-	SET
+		SET
 		password = #{password},
 		email = #{email},
-		address = #{address}
-	WHERE
+		address = #{address},
+		nickName
+		= #{nickName}
+		WHERE
 		id=#{id}
-</update>
+	</update>
 
-<delete id="delete">
-	DELETE FROM Member WHERE id = #{id}
-</delete>
+	<delete id="delete">
+		DELETE FROM Member WHERE id = #{id}
+	</delete>
 
-<select id="list" resultType="org.zerock.domain.project1.MemberVO">
-SELECT id, password, email, address, inserted
-FROM Member
-ORDER BY inserted DESC
-</select>
+	<select id="list"
+		resultType="org.zerock.domain.project1.MemberVO">
+		SELECT m.id, m.password, m.email, m.address, m.inserted, m.nickName,
+		COUNT(b.id) AS numberOfBoard
+		FROM Member m LEFT JOIN Board b ON m.id=b.writer
+		GROUP BY m.id 
+		ORDER BY m.inserted DESC;
+	</select>
 </mapper>

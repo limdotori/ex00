@@ -1,5 +1,7 @@
 package org.zerock.controller.project1;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -123,4 +125,46 @@ public class MemberController {
 
 		return "redirect:/board/list";
 	}
+	
+	@PostMapping("/remove")
+	public String remove(String id, HttpSession session, RedirectAttributes rttr) {
+		/* filter로 처리함
+		 * MemberVO vo = (MemberVO) session.getAttribute("loggedInMember");
+		 * 
+		 * // 로그아웃 상태 if (vo == null) { return "redirect:/member/login"; }
+		 */
+		
+		// 로그인된 상태
+		service.remove(id);
+		
+		session.invalidate();
+		
+		rttr.addFlashAttribute("result", "회원 탈퇴하였습니다");
+		
+		return "redirect:/board/list";
+		
+	}
+	
+	@GetMapping("/list")
+	public String list(Model model, HttpSession session) {
+		/* filter로 처리함
+		 * //로그인 된 상태가 아니라면 로그인화면으로 redirect MemberVO vo = (MemberVO)
+		 * session.getAttribute("loggedInMember");
+		 * 
+		 * // 로그아웃 상태 if (vo == null) { return "redirect:/member/login"; }
+		 */
+	
+		List<MemberVO> list = service.getList();
+		
+		model.addAttribute("memberList", list);
+		return null;
+	}
+	
 }
+
+
+
+
+
+
+

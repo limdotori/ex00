@@ -31,6 +31,10 @@
 						<label for="input2">패스워드</label>
 						<input type="password" required id="input2" class="form-control" name="password" value="${sessionScope.loggedInMember.password }">
 					</div>
+					<div class="form-group"> 
+						<label for="input5">닉네임</label>
+						<input type="text" required id="input5" class="form-control" name="nickName" value="${sessionScope.loggedInMember.nickName}">
+					</div>
 					<div class="form-group">
 						<label for="input3">이메일</label>
 						<input type="email" required id="input3" class="form-control" name="email" value="${sessionScope.loggedInMember.email }">
@@ -50,26 +54,25 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 
 	<script>
-      $(document).ready(
-          function() {
-        	  const infoForm = $("#infoForm");
-          
-              // 수정버튼 또는 삭제버튼 클릭 시 form의 action 속성값 변경
-              $("#modifyButton").click(function(e) {
-                e.preventDefault();
-                infoForm.attr("action", "");
-                infoForm.submit();
-              });
+		$(document).ready(function() {
+			const infoForm = $("#infoForm");
 
-              $("#removeButton").click(function(e) {
-                e.preventDefault();
-                if (confirm("탈퇴하시겠습니까?")) {
-                  infoForm.attr("action", "remove");
-                  infoForm.submit();
-                }
-              })
-          });
- </script>
+			// 수정버튼 또는 삭제버튼 클릭 시 form의 action 속성값 변경
+			$("#modifyButton").click(function(e) {
+				e.preventDefault();
+				infoForm.attr("action", "");
+				infoForm.submit();
+			});
+
+			$("#removeButton").click(function(e) {
+				e.preventDefault();
+				if (confirm("탈퇴하시겠습니까?")) {
+					infoForm.attr("action", "remove");
+					infoForm.submit();
+				}
+			})
+		});
+	</script>
 
 </body>
 </html>

@@ -30,17 +30,19 @@
 					<div class="form-group">
 						<label for="input2">내용</label>
 						<!-- <input type="text" class="form-control" id="input2" readonly=""> -->
-						<textarea class="form-control" id="input2" readyonly>${board.content }</textarea>
+						<textarea class="form-control" id="input2" readonly>${board.content }</textarea>
 					</div>
 					<div class="form-group">
 						<label for="input3">작성자</label>
-						<input type="text" class="form-control" id="input3"  value="${board.writer }" readonly>
+						<input type="text" class="form-control" id="input3" value="${board.nickName }" readonly>
 					</div>
 					<!-- a.btn-btn-outline-secondary>i.far.fa-edit -->
-					<a href="modify?id=${board.id }" class="btn-btn-outline-secondary">
-						수정/삭제
-						<!-- <i class="far fa-edit"></i> -->
-					</a>
+					<c:if test="${sessionScope.loggedInMember.id eq board.writer }">
+						<a href="modify?id=${board.id }" class="btn btn-outline-secondary">
+							수정/삭제
+							<!-- <i class="far fa-edit"></i> -->
+						</a>
+					</c:if>
 				</div>
 			</div>
 		</div>
