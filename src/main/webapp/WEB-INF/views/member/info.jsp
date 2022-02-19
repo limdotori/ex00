@@ -31,7 +31,11 @@
 						<label for="input2">패스워드</label>
 						<input type="password" required id="input2" class="form-control" name="password" value="${sessionScope.loggedInMember.password }">
 					</div>
-					<div class="form-group"> 
+					<div class="form-group">
+						<label for="input6">패스워드 확인</label>
+						<input type="password" required id="input6" class="form-control" ">
+					</div>
+					<div class="form-group">
 						<label for="input5">닉네임</label>
 						<input type="text" required id="input5" class="form-control" name="nickName" value="${sessionScope.loggedInMember.nickName}">
 					</div>
@@ -53,6 +57,28 @@
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 
+	<script>
+		//혼자서 시도해보는, 비밀번호, 비밀번호 확인 값이 같을 때만 수정 버튼 활성화
+		
+		const passwordInput = $("#input2");
+		const passwordConfirmInput = $("#input6");
+		const confirmFunction = function(){
+			const passwordValue = passwordInput.val();
+			const passwordConfirmValue=passwordConfirmInput.val();
+			
+			if(passwordValue == passwordConfirmValue){
+				modifyButton.removeAttr("disabled");
+			}else{
+				modifyButton.attr("disabled", true);
+			}
+		};
+	
+		modifyButton.attr("disabled",true);
+		
+		passwordInput.keyup(confirmFunction);
+		passwordConfirmInput.keyup(confirmFunction);
+	</script>
+	
 	<script>
 		$(document).ready(function() {
 			const infoForm = $("#infoForm");
